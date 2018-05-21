@@ -7,7 +7,7 @@ var rglib = (function() {
 
   function decode_iui(iui) {
     /*
-     * Try to decode an IUI into ts components parts. If valid, return an
+     * Try to decode an IUI into its component parts. If valid, return an
      * object with the components and `valid=true`. If not valid, then return
      * an object with a single property `valid=false`.
      */
@@ -56,7 +56,8 @@ var rglib = (function() {
     }
     
     /* build cleaned iui */
-    iui = [cores.toString, speed.toString, ram.toString, disk.toString, macs];
+    iui = [cores.toString(), speed.toString(), ram.toString(),
+      disk.toString(), macs];
     iui = iui.join(' ');
 
     return {
@@ -106,7 +107,10 @@ var rglib = (function() {
     return ret;
   }
 
-  function has_no_iui(iui_list, separator) {
+  function has_valid_iui(iui_list, separator) {
+    /*
+     * Check for at least 1 valid IUI. If so, return true, else false.
+     */
     var iuis = decode_iui_list(iui_list, separator);
     var found = false;
     var iui;
@@ -127,6 +131,9 @@ var rglib = (function() {
   }
 
   function support_part_number(product) {
+    /*
+     * Get the support port number, given the product name.
+     */
     if (product.indexOf('Demo') != -1) {
       return '';
     }
@@ -165,7 +172,10 @@ var rglib = (function() {
     decode_iui: decode_iui,
     is_valid_iui: is_valid_iui,
     clean_iui: clean_iui,
-    decode_iui_list: decode_iui_list
+    decode_iui_list: decode_iui_list,
+    has_valid_iui: has_valid_iui,
+    expected_nodes: expected_nodes,
+    support_part_number: support_part_number
   };
 }());
 
