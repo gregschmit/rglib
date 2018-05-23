@@ -3,7 +3,20 @@
 // Copyright 2018, Gregory N. Schmit
 // MIT Licensed
 
-var rglib = (function() {
+(function (root, factory) {
+  if(typeof define === "function" && define.amd) {
+    // requirejs/AMD stuff
+    define(function(){
+      return (root.rglib = factory());
+    });
+  } else if(typeof module === "object" && module.exports) {
+    // commonjs/node stuff
+    module.exports = (root.rglib = factory());
+  } else {
+    // window?
+    root.rglib = factory();
+  }
+}(this, function() {
 
   function decode_iui(iui) {
     /*
@@ -25,10 +38,10 @@ var rglib = (function() {
     var speed = Number(parts[1]);
     var ram = Number(parts[2]);
     var disk = Number(parts[3]);
-    if (!(Number.isInteger(cores)
-      && Number.isInteger(speed)
-      && Number.isInteger(ram)
-      && Number.isInteger(disk))) {
+    if (!(cores % 1 === 0
+      && speed % 1 === 0
+      && ram % 1 === 0
+      && disk % 1 === 0)) {
       return { valid: false, reason: "first 4 not integers" };
     }
 
@@ -177,9 +190,5 @@ var rglib = (function() {
     expected_nodes: expected_nodes,
     support_part_number: support_part_number
   };
-}());
 
-// node exports
-if (typeof(module) == "object") {
-  module.exports = exports = rglib;
-}
+}));
