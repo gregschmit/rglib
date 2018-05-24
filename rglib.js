@@ -6,7 +6,7 @@
 (function (root, factory) {
   if(typeof define === "function" && define.amd) {
     // requirejs/AMD stuff
-    define(function(){
+    define([], function(){
       return (root.rglib = factory());
     });
   } else if(typeof module === "object" && module.exports) {
