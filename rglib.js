@@ -4,7 +4,7 @@
 // MIT Licensed
 
 (function (root, factory) {
-  if(typeof define === "function" && define.amd) {
+  if(typeof define === "function" && define['amd']) {
     // requirejs/AMD stuff
     define([], function(){
       return (root.rglib = factory());
