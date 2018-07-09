@@ -86,7 +86,7 @@
   function is_valid_iui(iui) {
     /*
      * Validate the iui by decoding it and checking the valid property of the
-     * returned object. Returns `true` or `false` (the valid property.
+     * returned object. Returns `true` or `false` (the valid property).
      */
     return decode_iui(iui).valid;
   }
